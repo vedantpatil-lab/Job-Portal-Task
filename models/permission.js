@@ -14,23 +14,33 @@ module.exports = (sequelize, DataTypes)=>{
             type : DataTypes.TEXT,
             allowNull : false
         },
-        url : {
-            type : DataTypes.STRING,
-            allowNull : false
-        },
         baseUrl : {
             type : DataTypes.STRING,
             allowNull : false
         },
+        endpoint : {
+            type : DataTypes.STRING,
+            allowNull : false
+        },
         method : {
-            type : DataTypes.ENUM,
-            values : ["GET", "POST", "PUT", "PATCH", "DELETE"]
+            type : DataTypes.ENUM("GET", "POST", "PUT", "PATCH", "DELETE"),
+            allowNull : false
         }
     }, {
         tableName : "permissions",
         timestamps : true,
         underscore : true
     })
+
+    Permission.associate = (models)=>{
+        Permission.belongsToMany(models.Role, {
+            through : "role_permissions",
+            foreignKey : "permission_id",
+            otherKey : "role_id",
+            as : "roles",
+            onDelete : "CASCADE"    
+        })
+    }   
 
     return Permission
 }

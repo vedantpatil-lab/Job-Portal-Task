@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Recruiter.associate = (models)=>{
         Recruiter.hasMany(models.Job, {
-            foreignKey : "recruiterId",
+            foreignKey : "recuiter_id",
             onDelete : "CASCADE"
         })
     }

@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Job.associate = (models) => {
         Job.belongsTo(models.Recruiter, {
-            foreignKey: "recruiterId",
+            foreignKey: "recruiter_id",
             onDelete: "CASCADE"
         })
     }
